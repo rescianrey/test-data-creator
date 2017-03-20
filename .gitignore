@@ -1,2 +1,3 @@
 *.sublime-project
 *.sublime-workspace
+test_data_creator/node_modules/

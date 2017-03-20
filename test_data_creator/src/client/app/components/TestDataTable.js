@@ -1,6 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 
+import TestDataTableRow from './TestDataTableRow';
+
 export default class TestDataTable extends React.Component {
   constructor(props) {
     super(props);
@@ -8,163 +10,19 @@ export default class TestDataTable extends React.Component {
 
   render() {
     return (
-      <table className="slds-table slds-m-bottom--small slds-table--bordered slds-table--cell-buffer">
-        <thead>
-          <tr className="slds-text-title--caps">
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="col">
-              <div className="slds-truncate">Test Data Name</div>
-            </th>
-            <th scope="col">
-              <div className="slds-truncate">Number of records</div>
-            </th>
-            <th scope="col">
-              <div className="slds-truncate">Short Description</div>
-            </th>
-            <th scope="col">
-              <div className="slds-truncate">Status</div>
-            </th>
-          </tr>
+      <table className="slds-table slds-m-bottom--large slds-table--bordered slds-table--cell-buffer">
+        <thead className='slds-text-title--caps'>
+            <TestDataTableRow name='Test Data Name' numberOfRecords='Number of records' createIn='Create In' status='Status' shortDescription='Short Description'/>
         </thead>
         <tbody>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-001</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-002</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-003</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-004</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-004</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-004</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-004</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
-          <tr>
-            <th scope="col">
-               <input type="checkbox" name="options" tabindex="-1" />
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">TD-Data-004</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">1000</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Zendesk Only</div>
-            </th>
-            <th scope="row" data-label="">
-              <div className="slds-truncate" title="">Created</div>
-            </th>
-          </tr>
+          <TestDataTableRow name='TD-Data-001' numberOfRecords='1000' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-002' numberOfRecords='200' createIn='Salesforce Only' status='Created' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-003' numberOfRecords='500' createIn='Both' status='Created' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-004' numberOfRecords='100' createIn='Zendesk Only' status='Deleted' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-005' numberOfRecords='20' createIn='Salesforce only' status='Created' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-006' numberOfRecords='600' createIn='Both' status='Not Started' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-007' numberOfRecords='800' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
+          <TestDataTableRow name='TD-Data-008' numberOfRecords='1000' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
         </tbody>
       </table>
     );

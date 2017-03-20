@@ -6,6 +6,12 @@ import TestDataTable from './TestDataTable';
 export default class TestDataList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.redirectToCreationPage = this.redirectToCreationPage.bind(this);
+  }
+
+  redirectToCreationPage(e) {
+    window.location = '/a0L/e?retURL=/apex/TestDataDashboard';
   }
 
   render() {
@@ -22,7 +28,7 @@ export default class TestDataList extends React.Component {
               <p className="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">All Test Data</p>
             </div>
             <div className="slds-media__figure slds-media__figure--reverse">
-              <button className="slds-button slds-button--neutral">New</button>
+              <button className="slds-button slds-button--neutral" onClick={this.redirectToCreationPage}>New</button>
             </div>
           </div>
         </div>
