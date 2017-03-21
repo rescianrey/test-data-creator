@@ -30,7 +30,7 @@ export default class Toast extends React.Component {
         if (this.state.show) {
             toast = (
                 <div className="slds-notify_container slds-is-absolute">
-                    <div className="slds-notify slds-notify--toast slds-theme--success" role="alert">
+                    <div className="slds-notify slds-notify--toast slds-theme--success slds-float--right" role="alert">
                         <span className="slds-assistive-text">Info</span>
                         <div className="slds-notify__content slds-text-align--center">
                             <h2 className="slds-text-heading--small">{this.state.message}</h2>

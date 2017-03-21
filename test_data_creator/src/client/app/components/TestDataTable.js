@@ -2,29 +2,155 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import TestDataTableRow from './TestDataTableRow';
+import Toast from './Toast';
 
 export default class TestDataTable extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            showSpinner: true,
+            checked: false,
+            testDataItems: [],
+            selectedItems: [],
+            selectecAction: 'Create Test Data'
+        };
 
-  render() {
-    return (
-      <table className="slds-table slds-m-bottom--large slds-table--bordered slds-table--cell-buffer">
-        <thead className='slds-text-title--caps'>
-            <TestDataTableRow name='Test Data Name' numberOfRecords='Number of records' createIn='Create In' status='Status' shortDescription='Short Description'/>
-        </thead>
-        <tbody>
-          <TestDataTableRow name='TD-Data-001' numberOfRecords='1000' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-002' numberOfRecords='200' createIn='Salesforce Only' status='Created' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-003' numberOfRecords='500' createIn='Both' status='Created' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-004' numberOfRecords='100' createIn='Zendesk Only' status='Deleted' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-005' numberOfRecords='20' createIn='Salesforce only' status='Created' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-006' numberOfRecords='600' createIn='Both' status='Not Started' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-007' numberOfRecords='800' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
-          <TestDataTableRow name='TD-Data-008' numberOfRecords='1000' createIn='Zendesk Only' status='Created' shortDescription='Matched records'/>
-        </tbody>
-      </table>
-    );
-  }
+        this.retrieveRecords = this.retrieveRecords.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.addToChecklist = this.addToChecklist.bind(this);
+        this.removeToChecklist = this.removeToChecklist.bind(this);
+        this.performAction = this.performAction.bind(this);
+        this.selectAction = this.selectAction.bind(this);
+        this.retrieveRecords();
+    }
+
+    retrieveRecords() {
+        Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.retrieveTestData', function(result, status) {
+            if (status) {
+                this.setState({testDataItems: result, showSpinner: false});
+            }
+        }.bind(this));
+    }
+
+    handleChange() {
+        let currentValue = !this.state.checked;
+        this.setState(
+            Object.assign({}, this.state, {
+                checked: currentValue
+            })
+        );
+    }
+
+    selectAction(event) {
+        this.setState({selectecAction: event.target.value});
+    }
+
+    addToChecklist(testDataId) {
+        let newSelected = this.state.selectedItems.slice();
+        newSelected.push(testDataId);
+        this.setState({ selectedItems: newSelected });
+    }
+
+    removeToChecklist(testDataId) {
+        let newSelected = this.state.selectedItems.slice();
+        newSelected.remove(testDataId);
+        this.setState({ selectedItems: newSelected });
+    }
+
+    performAction(event) {
+        switch(this.state.selectecAction) {
+            case 'Create Test Data':
+                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.createTestData', this.state.selectedItems, function(result, event) {
+                    this.refs.toast.showToast(result);
+                }.bind(this));
+                break;
+            case 'Delete Test Data':
+                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.deleteTestData', this.state.selectedItems, function(result, event) {
+                    this.refs.toast.showToast(result);
+                }.bind(this));
+                break;
+            case 'Move to Trash':
+                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.moveToTrash', this.state.selectedItems, function(result, event) {
+                    this.refs.toast.showToast(result);
+                }.bind(this));
+                this.retrieveRecords();
+                break;
+        }
+    }
+
+    render() {
+        let spinner = null;
+        if (this.state.showSpinner) {
+            spinner = (
+                        <div className="slds-spinner_container" style={{marginTop: "8rem"}} >
+                            <div role="status" className="slds-spinner slds-spinner--medium slds-spinner--brand">
+                                <span className="slds-assistive-text">Loading</span>
+                                <div className="slds-spinner__dot-a"></div>
+                                <div className="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    );
+        }
+
+        return (
+            <div>
+                <Toast ref="toast" />
+                <div className="slds-is-relative">
+                    
+                    <div className="slds-clearfix slds-m-bottom--small slds-m-left--small slds-grid">
+                        <div className="slds-col">
+                            <div className="slds-form--inline">
+                                <div className="slds-form-element">
+                                    <div className="slds-form-element__control">
+                                        <div className="slds-select_container">
+                                            <select value={this.state.selectedAction} onChange={this.selectAction} className="slds-select">
+                                                <option>Create Test Data</option>
+                                                <option>Delete Test Data</option>
+                                                <option>Move to Trash</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="slds-form-element slds-clearfix">
+                                    <button className="slds-button slds-button--brand" onClick={this.performAction}>Go!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table className="slds-table slds-m-bottom--large slds-table--bordered slds-table--cell-buffer ">
+                        <thead className='slds-text-title--caps'>
+                            <tr>
+                                <th scope="col">
+                                   <input type="checkbox" name="select-all" onChange={this.handleChange} checked={this.state.checked}/>
+                                </th>
+                                <th scope="row" data-label="">
+                                  <div className="slds-truncate" title="">Test Data Name</div>
+                                </th>
+                                <th scope="row" data-label="">
+                                  <div className="slds-truncate" title="">Short Description</div>
+                                </th>
+                                <th scope="row" data-label="">
+                                  <div className="slds-truncate" title="">Create In</div>
+                                </th>
+                                <th scope="row" data-label="">
+                                  <div className="slds-truncate" title="">Number of Records</div>
+                                </th>
+                                <th scope="row" data-label="" className="slds-text-align--center">
+                                  <div className="slds-truncate" title="">Status</div>
+                                </th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.testDataItems.map( (record, index)=>{
+                                return <TestDataTableRow selected={this.state.checked} removeToChecklist={this.removeToChecklist} addToChecklist={this.addToChecklist} key={record.Id} recordId={record.Id} name={record.Name} numberOfRecords={record.Number_of_records_to_create__c} createIn={record.Create_in__c} status={record.Status__c} shortDescription={record.Short_Description__c}/>;
+                            } )}
+                        </tbody>
+                    </table>
+                    {spinner}
+                </div>
+            </div>
+        );
+    }
 }
