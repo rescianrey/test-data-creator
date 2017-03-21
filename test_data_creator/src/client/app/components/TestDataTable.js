@@ -26,7 +26,7 @@ export default class TestDataTable extends React.Component {
     }
 
     retrieveRecords() {
-        Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.retrieveTestData', function(result, status) {
+        Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.retrieveTestData', function(result, status) {
             if (status) {
                 this.setState({testDataItems: result, showSpinner: false});
             }
@@ -77,17 +77,17 @@ export default class TestDataTable extends React.Component {
         this.refs.toast.showToast('Processing...');
         switch(this.state.selectecAction) {
             case 'Create Test Data':
-                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.createTestData', this.state.selectedItems, function(result, event) {
+                Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.createTestData', this.state.selectedItems, function(result, event) {
                     this.refs.toast.showToast(result);
                 }.bind(this));
                 break;
             case 'Delete Test Data':
-                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.deleteTestData', this.state.selectedItems, function(result, event) {
+                Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.deleteTestData', this.state.selectedItems, function(result, event) {
                     this.refs.toast.showToast(result);
                 }.bind(this));
                 break;
             case 'Move to Trash':
-                Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.moveToTrash', this.state.selectedItems, function(result, event) {
+                Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.moveToTrash', this.state.selectedItems, function(result, event) {
                     this.refs.toast.showToast(result);
                 }.bind(this));
                 this.retrieveRecords();
