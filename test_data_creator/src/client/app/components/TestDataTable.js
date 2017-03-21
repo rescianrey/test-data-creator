@@ -35,11 +35,11 @@ export default class TestDataTable extends React.Component {
 
     handleChange() {
         let currentValue = !this.state.checked;
-        this.setState(
-            Object.assign({}, this.state, {
-                checked: currentValue
-            })
-        );
+        this.setState({checked: currentValue});
+
+        this.state.testDataItems.map((record, index) => {
+            this.refs[record.Id].setSelected(currentValue);
+        });
     }
 
     selectAction(event) {
@@ -59,6 +59,7 @@ export default class TestDataTable extends React.Component {
     }
 
     performAction(event) {
+        this.refs.toast.showToast('Processing...');
         switch(this.state.selectecAction) {
             case 'Create Test Data':
                 Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.createTestData', this.state.selectedItems, function(result, event) {
@@ -77,6 +78,10 @@ export default class TestDataTable extends React.Component {
                 this.retrieveRecords();
                 break;
         }
+
+        this.state.selectedItems.map((testDataId, index) => {
+            this.refs[testDataId].setSelected(false);
+        });
     }
 
     render() {
@@ -144,7 +149,7 @@ export default class TestDataTable extends React.Component {
                         </thead>
                         <tbody>
                             {this.state.testDataItems.map( (record, index)=>{
-                                return <TestDataTableRow selected={this.state.checked} removeToChecklist={this.removeToChecklist} addToChecklist={this.addToChecklist} key={record.Id} recordId={record.Id} name={record.Name} numberOfRecords={record.Number_of_records_to_create__c} createIn={record.Create_in__c} status={record.Status__c} shortDescription={record.Short_Description__c}/>;
+                                return <TestDataTableRow ref={record.Id} selected={this.state.checked} removeToChecklist={this.removeToChecklist} addToChecklist={this.addToChecklist} key={record.Id} recordId={record.Id} name={record.Name} numberOfRecords={record.Number_of_records_to_create__c} createIn={record.Create_in__c} status={record.Status__c} shortDescription={record.Short_Description__c}/>;
                             } )}
                         </tbody>
                     </table>
