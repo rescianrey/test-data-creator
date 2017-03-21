@@ -37,9 +37,14 @@ export default class TestDataTable extends React.Component {
         let currentValue = !this.state.checked;
         this.setState({checked: currentValue});
 
+        let recordIds = [];
         this.state.testDataItems.map((record, index) => {
             this.refs[record.Id].setSelected(currentValue);
+            if (currentValue) {
+                recordIds.push(record.Id);
+            }
         });
+        this.setState({ selectedItems: recordIds });
     }
 
     selectAction(event) {
@@ -47,12 +52,22 @@ export default class TestDataTable extends React.Component {
     }
 
     addToChecklist(testDataId) {
+        if (this.state.selectedItems.indexOf(testDataId) > -1){
+            return;
+        }
+
         let newSelected = this.state.selectedItems.slice();
+        console.log('SLICE: '+newSelected);
         newSelected.push(testDataId);
         this.setState({ selectedItems: newSelected });
+        console.log(newSelected);
     }
 
     removeToChecklist(testDataId) {
+        if (this.state.selectedItems.indexOf(testDataId) < 0){
+            return;
+        }
+
         let newSelected = this.state.selectedItems.slice();
         newSelected.remove(testDataId);
         this.setState({ selectedItems: newSelected });
@@ -82,6 +97,8 @@ export default class TestDataTable extends React.Component {
         this.state.selectedItems.map((testDataId, index) => {
             this.refs[testDataId].setSelected(false);
         });
+        this.setState({ selectedItems: [] });
+        this.setState({checked: false});
     }
 
     render() {

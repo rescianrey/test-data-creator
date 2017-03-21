@@ -56,6 +56,7 @@ export default class NukeTestDataForm extends React.Component {
 
     nukeData(e) {
         e.preventDefault();
+        this.refs.toast.showToast('Processing...');
         this.setState({sf_object: 'None', zd_object: 'None', nuke_button_disabled: true});
         Visualforce.remoting.Manager.invokeAction('TestDataListCtrl.nukeData', this.state.sf_object, this.state.zd_object, function(result, event) {
             this.refs.toast.showToast(result);

@@ -1,0 +1,6 @@
+.toast {
+	background-color: #fdf8f8;
+	color: #333;
+	border: 2px solid gray;
+	min-width: 20rem;
+}
