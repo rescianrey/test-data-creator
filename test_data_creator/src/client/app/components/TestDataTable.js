@@ -99,7 +99,7 @@ export default class TestDataTable extends React.Component {
                     });
                 });
                 this.setState({testDataItems: testDataClone});
-                this.refs.toast.showToast('Records Deleted.');
+                this.refs.toast.showToast('Records Deleted');
                 break;
         }
 
@@ -163,10 +163,13 @@ export default class TestDataTable extends React.Component {
                                   <div className="slds-truncate" title="">Short Description</div>
                                 </th>
                                 <th scope="row" data-label="">
+                                  <div className="slds-truncate" title="">Objects</div>
+                                </th>
+                                <th scope="row" data-label="">
                                   <div className="slds-truncate" title="">Create In</div>
                                 </th>
                                 <th scope="row" data-label="">
-                                  <div className="slds-truncate" title="">Number of Records</div>
+                                  <div className="slds-truncate" title="">#</div>
                                 </th>
                                 <th scope="row" data-label="" className="slds-text-align--center">
                                   <div className="slds-truncate" title="">Status</div>
@@ -175,7 +178,7 @@ export default class TestDataTable extends React.Component {
                         </thead>
                         <tbody>
                             {this.state.testDataItems.map( (record, index)=>{
-                                return <TestDataTableRow ref={record.Id} selected={this.state.checked} removeToChecklist={this.removeToChecklist} addToChecklist={this.addToChecklist} key={record.Id} recordId={record.Id} name={record.Name} numberOfRecords={record.Number_of_records_to_create__c} createIn={record.Create_in__c} status={record.Status__c} shortDescription={record.Short_Description__c}/>;
+                                return <TestDataTableRow ref={record.Id} selected={this.state.checked} removeToChecklist={this.removeToChecklist} addToChecklist={this.addToChecklist} key={record.Id} recordId={record.Id} name={record.Name} numberOfRecords={record.Number_of_records_to_create__c} createIn={record.Create_in__c} status={record.Status__c} shortDescription={record.Short_Description__c} sfObject={record.Salesforce_Object__c} zObject={record.Zendesk_Object__c}/>;
                             } )}
                         </tbody>
                     </table>

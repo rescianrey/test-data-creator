@@ -104,6 +104,15 @@ export default class TestDataTableRow extends React.Component {
       name = <a href={'/' + this.props.recordId}>{this.props.name}</a>;
     }
 
+    let objs = '';
+    if (this.props.sfObject != null && this.props.zObject != null) {
+      objs = this.props.sfObject + ' & ' + this.props.zObject;
+    } else if (this.props.sfObject != null) {
+      objs = this.props.sfObject;
+    } else if (this.props.zObject != null) {
+      objs = this.props.zObject;
+    }
+
     return (
           <tr>
             <th scope="col">
@@ -114,6 +123,9 @@ export default class TestDataTableRow extends React.Component {
             </th>
             <th scope="row" data-label="">
               <div className="slds-truncate" title="">{this.props.shortDescription}</div>
+            </th>
+            <th scope="row" data-label="">
+              <div className="slds-truncate" title="">{objs}</div>
             </th>
             <th scope="row" data-label="">
               <div className="slds-truncate" title="">{this.props.createIn}</div>
