@@ -14,10 +14,10 @@ class App extends React.Component {
         return (
             <div className="slds-is-relative">
                 <div className="slds-grid">
-                    <div className="slds-size--1-of-4">
+                    <div className="slds-size--1-of-5">
                         <NukeTestDataForm />
                     </div>
-                    <div className="slds-size--3-of-4">
+                    <div className="slds-size--4-of-5">
                         <TestDataList />
                     </div>
                 </div>

@@ -7,5 +7,9 @@
 }
 
 .nuke-icon {
-	background-color: #ea2000;
+	background-color: #38342d;
+}
+
+.number-of-records {
+	min-width: 70px;
 }

@@ -80,7 +80,7 @@ export default class NukeTestDataForm extends React.Component {
                             <div className="slds-media__body">
                                 <h2>
                                     <a href="javascript:void(0);" className="slds-card__header-link slds-truncate">
-                                        <span className="slds-text-heading--small">Nuke Test Data</span>
+                                        <span className="slds-text-heading--small">Nuke Records</span>
                                     </a>
                                 </h2>
                             </div>
