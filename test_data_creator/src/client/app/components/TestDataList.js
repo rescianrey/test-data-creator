@@ -14,7 +14,7 @@ export default class TestDataList extends React.Component {
     }
 
     render() {
-        var useTag = "<use xlink:href='" + ICON_CONTAINER + "custom-sprite/svg/symbols.svg#custom57')}'></use>";
+        var useTag = "<use xlink:href='" + ICON_CONTAINER + "custom-sprite/svg/symbols.svg#custom7')}'></use>";
         return (
                 <div>
                     <div className="slds-page-header slds-m-bottom--small" role="banner">

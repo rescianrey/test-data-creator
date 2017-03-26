@@ -1,6 +1,11 @@
 .toast {
-	background-color: #fdf8f8;
+	background-color: #fff;
 	color: #333;
-	border: 2px solid gray;
+	border: 1px solid #bae26c;
 	min-width: 20rem;
+	border-radius: 0px;
+}
+
+.nuke-icon {
+	background-color: #ea2000;
 }

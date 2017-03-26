@@ -26,8 +26,10 @@ export default class TestDataTableRow extends React.Component {
   }
 
   checkStatus() {
-    Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.checkStatus', this.props.recordId, function(result, event) {
+    Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.checkStatus', this.props.recordId, function(result, status) {
+      if (status) {
         this.setState({ status: result.status, percentage: result.percentage });
+      }
     }.bind(this));
   }
 

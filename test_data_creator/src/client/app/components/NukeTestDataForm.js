@@ -64,7 +64,7 @@ export default class NukeTestDataForm extends React.Component {
     }
 
     render() {
-        var useTag = "<use xlink:href='" + ICON_CONTAINER + "standard-sprite/svg/symbols.svg#account')}'></use>";
+        var useTag = "<use xlink:href='" + ICON_CONTAINER + "custom-sprite/svg/symbols.svg#custom7')}'></use>";
     
         return (
             <form>
@@ -73,8 +73,8 @@ export default class NukeTestDataForm extends React.Component {
                     <div className="slds-card__header slds-p-horizontal--none">
                         <header className="slds-media slds-media--center slds-has-flexi-truncate">
                             <div className="slds-media__figure">
-                                <span className="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
-                                    <svg className="slds-icon slds-icon--small" aria-hidden="true" dangerouslySetInnerHTML={{__html: useTag }}></svg>
+                                <span className="slds-icon_container nuke-icon" title="description of icon when needed">
+                                    <svg className="slds-icon slds-icon--medium" aria-hidden="true" dangerouslySetInnerHTML={{__html: useTag }}></svg>
                                 </span>
                             </div>
                             <div className="slds-media__body">

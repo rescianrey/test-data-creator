@@ -57,10 +57,8 @@ export default class TestDataTable extends React.Component {
         }
 
         let newSelected = this.state.selectedItems.slice();
-        console.log('SLICE: '+newSelected);
         newSelected.push(testDataId);
         this.setState({ selectedItems: newSelected });
-        console.log(newSelected);
     }
 
     removeToChecklist(testDataId) {
@@ -88,9 +86,20 @@ export default class TestDataTable extends React.Component {
                 break;
             case 'Move to Trash':
                 Visualforce.remoting.Manager.invokeAction('TestDataDashboardCtrl.moveToTrash', this.state.selectedItems, function(result, event) {
-                    this.refs.toast.showToast(result);
+                    // do nothing on success
                 }.bind(this));
-                this.retrieveRecords();
+                
+                let testDataClone = this.state.testDataItems.slice();
+                this.state.selectedItems.map((testDataId, i) => {
+                    testDataClone.forEach(function(testDataItm, index, array) {
+                        if (testDataItm.Id === testDataId) {
+                            testDataClone.splice(index, 1);
+                            return;
+                        }
+                    });
+                });
+                this.setState({testDataItems: testDataClone});
+                this.refs.toast.showToast('Records Deleted.');
                 break;
         }
 
