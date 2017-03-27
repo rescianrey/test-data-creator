@@ -1,5 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactTransitionGroup from 'react-addons-transition-group'
 
 export default class Toast extends React.Component {
     constructor(props) {
@@ -20,7 +22,7 @@ export default class Toast extends React.Component {
 
     showToast(message) {
         this.setState({show: true, message: message});
-        setTimeout(this.hideToast, 4000);
+        setTimeout(this.hideToast, 2000);
     }
 
     render() {
@@ -39,6 +41,13 @@ export default class Toast extends React.Component {
                 </div>
             );
         }
-        return toast;
+        return (
+            <ReactCSSTransitionGroup
+              transitionName="toast"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={1000}>
+              {toast}
+            </ReactCSSTransitionGroup>
+        );
     }
 }
