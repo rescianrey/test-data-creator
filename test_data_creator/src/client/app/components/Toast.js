@@ -20,7 +20,7 @@ export default class Toast extends React.Component {
 
     showToast(message) {
         this.setState({show: true, message: message});
-        setTimeout(this.hideToast, 2000);
+        setTimeout(this.hideToast, 4000);
     }
 
     render() {
