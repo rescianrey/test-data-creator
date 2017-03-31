@@ -27,7 +27,7 @@ export default class TestDataTableRow extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(this.checkStatus, 5000);
+    setInterval(this.checkStatus, 8000);
   }
 
   setSelected(val) {
